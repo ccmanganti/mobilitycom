@@ -61,17 +61,17 @@ class RolesAndPermissionSeeder extends Seeder
                 'delete readings'
             ],
             'user' => [
-                'view own user',
-                'delete own user',
-                'view own gloves',
+                'view users',
+                'delete users',
+                'view gloves',
                 'create gloves',
                 'edit gloves',
                 'delete gloves',
-                'view own actions',
+                'view actions',
                 'create actions',
                 'edit actions',
                 'delete actions',
-                'view own readings',
+                'view readings',
                 'create readings',
                 'edit readings',
                 'delete readings'
