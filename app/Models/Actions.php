@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+use App\Models\Gloves;
 
 class Actions extends Model
 {
@@ -17,7 +20,7 @@ class Actions extends Model
     // An action should only be belong to one glove.
     public function glove(): BelongsTo {
 
-        return $this->belongsTo(Glove::class);
+        return $this->belongsTo(Gloves::class);
 
     }
 }

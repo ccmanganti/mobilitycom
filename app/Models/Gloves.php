@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Models\User;
+use App\Models\Actions;
+use App\Models\Readings;
 
 class Gloves extends Model
 {
@@ -20,7 +23,7 @@ class Gloves extends Model
     // A glove can be belong to one user only.
     public function user(): BelongsTo {
 
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(User::class);
 
     }
 
@@ -28,7 +31,7 @@ class Gloves extends Model
     // A glove can have multiple actions. One to Many.
     public function actions(): HasMany {
     
-        return this->hasMany(Actions::class);
+        return $this->hasMany(Actions::class);
     
     }
 

@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Models\Gloves;
+
 // Other Imports
 use Spatie\Permission\Traits\HasRoles;
 
@@ -58,7 +60,7 @@ class User extends Authenticatable
     // A user can have multiple gloves. One to Many.
     public function gloves(): HasMany {
     
-        return this->hasMany(Gloves::class);
+        return $this->hasMany(Gloves::class);
     
     }
 
