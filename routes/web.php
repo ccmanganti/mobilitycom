@@ -18,3 +18,24 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/key', function(){
+    artisan::call('key:generate');
+});
+
+Route::get('/optimize', function(){
+    artisan::call('optimize:clear');
+});
+
+Route::get('/migrate', function(){
+    artisan::call('migrate:refresh');
+});
+
+Route::get('/seed', function(){
+    artisan::call('db:seed', ['--class=RolesAndPermissionSeeder']);
+});
+
+Route::get('/composer-install', function(){
+    artisan::call('composer:install');
+});
