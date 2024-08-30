@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gloves;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GlovesController extends Controller
 {
@@ -12,7 +13,8 @@ class GlovesController extends Controller
      */
     public function index()
     {
-        //
+        $gloves = Gloves::all();
+        return response()->json($gloves);
     }
 
     /**
@@ -28,7 +30,10 @@ class GlovesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $glove = New Gloves;
+        $glove->serial_number = $request->serial_number;
+
+        return response()->json($glove, 201);
     }
 
     /**
@@ -36,7 +41,7 @@ class GlovesController extends Controller
      */
     public function show(Gloves $gloves)
     {
-        //
+        return response()->json($gloves, 200);
     }
 
     /**
@@ -50,9 +55,18 @@ class GlovesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Gloves $gloves)
+    public function update(Request $request)
     {
-        //
+        if ($request->filled('user_id')){
+            $gloves = Gloves::where('serial_number', $request->serial_number)->first();
+            if (!$gloves){
+                return response()->json(['message' => 'Glove not found'], 404);
+            }
+            $user = Auth::id();
+            $gloves->user_id = $user;
+        }
+        $gloves->save();
+        return response()->json($gloves, 200);
     }
 
     /**
@@ -60,6 +74,7 @@ class GlovesController extends Controller
      */
     public function destroy(Gloves $gloves)
     {
-        //
+        $gloves->delete();
+        return response()->json(['message' => 'Glove deleted successfully'], 200);
     }
 }

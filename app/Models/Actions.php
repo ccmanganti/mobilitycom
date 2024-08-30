@@ -12,6 +12,16 @@ class Actions extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'glove_id',
+        'finger_1',
+        'finger_2',
+        'finger_3',
+        'finger_4',
+        'finger_5',
+        'patient_need',
+    ];
+
     //////////////////////
     // CUSTOM FUNCTIONS //
     //////////////////////

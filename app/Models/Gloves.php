@@ -15,6 +15,11 @@ class Gloves extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'serial_number',
+    ];
+
     //////////////////////
     // CUSTOM FUNCTIONS //
     //////////////////////
