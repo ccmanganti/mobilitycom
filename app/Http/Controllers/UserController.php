@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,15 +14,21 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return $users;
+        return response()->json($users);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // $user = new User;
+        // $user->name = $request->name;
+        // $user->username = $request->username;
+        // $user->password = Hash::make($request->password);
+        // $user->save();
+
+        // return response()->json($user, 201);
     }
 
     /**
@@ -29,7 +36,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json($user, 201);
     }
 
     /**
@@ -37,7 +51,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return response()->json($user);
     }
 
     /**
@@ -53,7 +67,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+
+        if ($request->filled('password')){
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        return response()->json($user, 200);
     }
 
     /**
@@ -61,6 +84,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json(['message' => 'User deleted successfully'], 200);
     }
 }
