@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gloves', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('serial_number');
             $table->timestamps();
 

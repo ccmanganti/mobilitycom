@@ -16,5 +16,6 @@ use App\Http\Controllers\ReadingsController;
 
 Route::resource('users', UserController::class);
 Route::resource('gloves', GlovesController::class);
+Route::post('gloves/check-serial', [GlovesController::class, 'check_serial']);
 Route::resource('actions', ActionsController::class);
 Route::resource('readings', ReadingsController::class);

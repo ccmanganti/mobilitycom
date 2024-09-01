@@ -77,4 +77,19 @@ class GlovesController extends Controller
         $gloves->delete();
         return response()->json(['message' => 'Glove deleted successfully'], 200);
     }
+    
+    //////////////////////
+    // CUSTOM FUNCTIONS //
+    //////////////////////
+
+    public function check_serial(Request $request){
+        $checkGloves = Gloves::where('serial_number', $request->serial_number)->first();
+        if (!$checkGloves){
+            $gloves = New Gloves;
+            $gloves->serial_number = $request->serial_number;
+            $gloves->save();
+            return response()->json($gloves, 201);
+        }
+        return response()->json(['message' => 'Glove is registered', 'glove' => $checkGloves], 200);
+    }
 }

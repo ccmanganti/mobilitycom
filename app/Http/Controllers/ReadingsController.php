@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Readings;
+use App\Models\Gloves;
 use Illuminate\Http\Request;
 
 class ReadingsController extends Controller
@@ -10,9 +11,11 @@ class ReadingsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $glove = Gloves::where('serial_number', $request->serial_number)->first();
+        $readings = Readings::where('glove_id', $glove->id);
+        return response()->json($readings, 200);
     }
 
     /**
@@ -28,7 +31,17 @@ class ReadingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $glove = Gloves::where('serial_number', $request->serial_number)->first();
+        $readings = New Readings;
+        $readings->glove_id = $glove->id;
+        $readings->finger_1 = $request->finger_1;
+        $readings->finger_2 = $request->finger_2;
+        $readings->finger_3 = $request->finger_3;
+        $readings->finger_4 = $request->finger_4;
+        $readings->finger_5 = $request->finger_5;
+        $readings->save();
+
+        return response()->json($readings, 201);
     }
 
     /**
